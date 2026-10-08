@@ -11,27 +11,27 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:linear-gradient(135deg,#173b70,#2478d8);color:#fff;padding:28px 18px 34px}
-.wrap{max-width:1320px;margin:auto}
-.badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:6px 12px;border-radius:99px;font-size:13px}
-h1{font-size:clamp(28px,5vw,48px);margin:12px 0 6px;line-height:1.05}
-.subtitle{opacity:.9;font-size:16px}
+header{background:linear-gradient(135deg,#173b70,#2478d8);color:#fff;padding:18px 14px 22px}
+.wrap{max-width:1380px;margin:auto}
+.badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:99px;font-size:11px}
+h1{font-size:clamp(23px,4vw,38px);margin:8px 0 4px;line-height:1.05}
+.subtitle{opacity:.9;font-size:13px}
 nav{position:sticky;top:0;z-index:5;background:#ffffffee;backdrop-filter:blur(10px);border-bottom:1px solid #dfe7ef}
-.navin{display:flex;gap:8px;overflow:auto;padding:9px 12px;max-width:1100px;margin:auto}
-nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:700;padding:9px 13px;border-radius:10px}
+.navin{display:flex;gap:5px;overflow:auto;padding:6px 10px;max-width:1180px;margin:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:700;font-size:12px;padding:7px 9px;border-radius:8px}
 nav a:hover{background:#eaf2ff}
-main{padding:20px 16px 50px}
-.card{background:var(--card);border:1px solid #e0e8f1;border-radius:20px;padding:22px;margin:16px 0;box-shadow:0 8px 25px #16324d0b}
-h2{margin-top:0;font-size:27px}
-h3{margin-bottom:8px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-.info{padding:16px;border-radius:15px;background:#f7faff;border-left:5px solid var(--blue)}
+main{padding:12px 10px 28px}
+.card{background:var(--card);border:1px solid #e0e8f1;border-radius:14px;padding:14px;margin:10px 0;box-shadow:0 5px 16px #16324d0b}
+h2{margin-top:0;font-size:20px;line-height:1.2}
+h3{margin-bottom:6px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+.info{padding:10px;border-radius:11px;background:#f7faff;border-left:5px solid var(--blue)}
 .info.green{border-left-color:var(--green)} .info.orange{border-left-color:var(--orange)}
-button{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#fff}
+button{border:0;border-radius:9px;padding:8px 11px;font-weight:800;font-size:12px;cursor:pointer;background:var(--blue);color:#fff}
 button.secondary{background:#e9f1fb;color:var(--ink)}
 button.green{background:var(--green)} button.orange{background:var(--orange)}
-.controls{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
-.sim{background:#10283d;color:#fff;border-radius:20px;padding:18px;overflow:hidden;max-width:1180px;margin:auto}
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.sim{background:#10283d;color:#fff;border-radius:14px;padding:12px;overflow:hidden;max-width:1240px;margin:auto}
 .sim h2,.sim h3{color:#fff}
 .lungs{height:280px;display:flex;align-items:center;justify-content:center;gap:22px;position:relative}
 .lung{width:105px;height:145px;background:#ef6b73;border-radius:55% 45% 48% 52%;box-shadow:inset -12px -15px 20px #b63f4c88;transition:.8s}
@@ -59,29 +59,33 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 
 @keyframes air{0%{top:20px;opacity:0}35%{opacity:1}100%{top:155px;opacity:0}}
 .readout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.read{background:#ffffff12;border:1px solid #ffffff1f;border-radius:12px;padding:12px;text-align:center}
-.read strong{display:block;font-size:24px;color:#6ee7ff}
-.bar{height:16px;background:#ffffff1a;border-radius:20px;overflow:hidden;margin:8px 0 14px}
+.read{background:#ffffff12;border:1px solid #ffffff1f;border-radius:9px;padding:8px;text-align:center;font-size:11px}
+.read strong{display:block;font-size:18px;color:#6ee7ff;margin:2px 0}
+.bar{height:10px;background:#ffffff1a;border-radius:20px;overflow:hidden;margin:8px 0 14px}
 .fill{height:100%;width:50%;background:#42d7ff;border-radius:20px;transition:.5s}
 
 
 
 
 
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
-.step{padding:14px;border-radius:14px;background:#f8fafc;border:1px solid #e3e9ef}
-.step b{display:block;color:var(--blue);margin-bottom:4px}
-.question{padding:15px;border:1px solid #e2e8f0;border-radius:14px;margin:10px 0}
-.quiz-image{margin:12px 0;padding:10px;border-radius:15px;background:linear-gradient(135deg,#eef7ff,#ffffff);border:1px solid #dce9f5;display:flex;justify-content:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:7px}
+.step{padding:9px;border-radius:10px;font-size:11px;background:#f8fafc;border:1px solid #e3e9ef}
+.step b{display:block;color:var(--blue);margin-bottom:3px;font-size:12px}
+.question{padding:10px;border:1px solid #e2e8f0;border-radius:10px;margin:7px 0;font-size:12px}
+.quiz-image{margin:8px 0;padding:6px;border-radius:10px;background:linear-gradient(135deg,#eef7ff,#ffffff);border:1px solid #dce9f5;display:flex;justify-content:center}
+.quiz-image.real-anatomy{min-height:150px;align-items:center;overflow:hidden}
+.quiz-image.real-anatomy img{display:block;max-width:100%;width:auto;height:165px;object-fit:contain;border-radius:6px}
+.quiz-image.real-anatomy.intestine img{height:180px}
+
 /* Interactive anatomy upgrade */
-.anatomy-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr);gap:14px;align-items:stretch}
-.anatomy-visual{background:linear-gradient(145deg,#102d43,#173d57);border:1px solid #ffffff18;border-radius:18px;position:relative;min-height:380px;overflow:hidden}
-.anatomy-visual svg{width:100%;height:380px;display:block}
+.anatomy-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(210px,.45fr);gap:9px;align-items:start}
+.anatomy-visual{background:linear-gradient(145deg,#102d43,#173d57);border:1px solid #ffffff18;border-radius:12px;position:relative;min-height:300px;overflow:hidden}
+.anatomy-visual svg{width:100%;height:300px;display:block}
 .organ-hotspot{cursor:pointer;transition:filter .2s,transform .2s}
 .organ-hotspot:hover,.organ-hotspot.active{filter:brightness(1.12) drop-shadow(0 5px 8px #0005)}
-.anatomy-info{background:#f7fbff;border:1px solid #dbe7f1;border-radius:16px;padding:16px;color:var(--ink)}
+.anatomy-info{background:#f7fbff;border:1px solid #dbe7f1;border-radius:11px;padding:10px;color:var(--ink);font-size:12px}
 .anatomy-info h3{margin-top:0}
-.info-pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#e7f6ff;color:#12648a;font-weight:800;font-size:12px;margin-bottom:8px}
+.info-pill{display:inline-block;padding:3px 7px;border-radius:999px;background:#e7f6ff;color:#12648a;font-weight:800;font-size:12px;margin-bottom:8px}
 .air-flow{fill:#69e5ff;filter:drop-shadow(0 0 4px #69e5ff)}
 .air-flow.exhale{fill:#d6a0ff}
 .breathing .lung-shape{transform-box:fill-box;transform-origin:center;animation:lungPulse 2.4s ease-in-out infinite}
@@ -91,11 +95,11 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 @keyframes airTravel{0%{opacity:0;transform:translateY(-8px)}20%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(92px)}}
 
 
-.organ-key{display:grid;gap:8px;margin-top:12px}
-.organ-key button{text-align:left;background:#edf5fb;color:#17324d;border:1px solid #d4e2ec}
+.organ-key{display:grid;gap:5px;margin-top:8px}
+.organ-key button{text-align:left;background:#edf5fb;color:#17324d;border:1px solid #d4e2ec;padding:7px 8px;font-size:11px}
 .organ-key button:hover{background:#e0f0fb}
-.digest-anatomy{background:linear-gradient(145deg,#102d43,#173d57);border-radius:18px;min-height:410px;position:relative;overflow:hidden}
-.digest-anatomy svg{width:100%;height:410px;display:block}
+.digest-anatomy{background:linear-gradient(145deg,#102d43,#173d57);border-radius:12px;min-height:330px;position:relative;overflow:hidden}
+.digest-anatomy svg{width:100%;height:330px;display:block}
 .digest-organ{cursor:pointer;transition:filter .2s}
 .digest-organ:hover,.digest-organ.active{filter:brightness(1.12) drop-shadow(0 5px 8px #0005)}
 .feces{filter:drop-shadow(0 2px 3px #0006)}
@@ -105,18 +109,36 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 @keyframes nutrientMove{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(75px,12px);opacity:0}}
 .fecal-flow .feces{animation:fecesTravel 8s linear infinite}
 @keyframes fecesTravel{0%{transform:translate(-105px,-8px);opacity:0}8%{opacity:1}28%{transform:translate(-55px,40px)}50%{transform:translate(15px,88px)}72%{transform:translate(72px,142px)}90%{transform:translate(98px,205px);opacity:1}100%{transform:translate(112px,250px);opacity:0}}
-.digest-labels{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.digest-labels{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
 .digest-labels button{background:#eaf4fb;color:#17324d;border:1px solid #cfdee9}
-.process-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
-.process-step{background:#ffffff0d;border:1px solid #ffffff18;border-radius:12px;padding:10px;text-align:center;color:#e9f8ff}
-.process-step strong{display:block;color:#6de0ff;margin-bottom:3px}
+.process-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}
+.process-step{background:#ffffff0d;border:1px solid #ffffff18;border-radius:8px;padding:7px;text-align:center;color:#e9f8ff;font-size:10px}
+.process-step strong{display:block;color:#6de0ff;margin-bottom:2px;font-size:11px}
+
+/* Exact reference image: visual tidak diubah, hanya diletakkan sebagai lapisan asas simulator. */
+.resp-reference{background:#fff;display:flex;align-items:center;justify-content:center;min-height:300px}
+.resp-image-wrap{position:relative;width:min(100%,360px);aspect-ratio:1/1;margin:auto}
+.resp-image-wrap>img{display:block;width:100%;height:100%;object-fit:contain}
+.resp-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.air-path{fill:none;stroke-width:2;stroke-dasharray:7 7;opacity:.28}
+.air-path.inhale{stroke:#159de0}
+.air-path.exhale{stroke:#8a5bd6}
+.air-particles circle{fill:#159de0;filter:drop-shadow(0 0 3px #159de0)}
+.resp-pulse ellipse{fill:none;stroke:#ff6d73;stroke-width:2;opacity:.25;transform-box:fill-box;transform-origin:center;animation:respPulse 2.2s ease-in-out infinite}
+.resp-pulse ellipse:nth-child(2){animation-delay:.1s}
+.resp-reference:not(.breathing) .air-particles,.resp-reference:not(.breathing) .resp-pulse{visibility:hidden}
+@keyframes respPulse{0%,100%{transform:scale(.96);opacity:.12}50%{transform:scale(1.08);opacity:.7}}
+.resp-hotspot{position:absolute;z-index:2;padding:5px 8px;border-radius:999px;background:#fff;color:#17324d;border:1px solid #cddde8;font-size:10px;box-shadow:0 2px 6px #17324d22}
+.resp-hotspot.nose{left:2%;top:25%}.resp-hotspot.trachea{left:2%;top:43%}.resp-hotspot.lungs{right:1%;top:58%}
+.resp-note{font-size:10px;text-align:center;color:#4b6679;margin-top:3px}.resp-note span{color:#159de0;font-weight:800}.resp-note em{color:#8a5bd6;font-style:normal;font-weight:800}
+
 @media(max-width:760px){
  .anatomy-layout{grid-template-columns:1fr}
- .anatomy-visual,.anatomy-visual svg{min-height:320px;height:320px}
- .digest-anatomy,.digest-anatomy svg{min-height:340px;height:340px}
+ .anatomy-visual{min-height:250px}.anatomy-visual svg{height:250px}
+ .digest-anatomy,.digest-anatomy svg{min-height:280px;height:280px}
  .process-strip{grid-template-columns:repeat(2,1fr)}
- .drag-label{font-size:11px;padding:7px 9px}
- .drop-target{min-width:82px}
+ .resp-hotspot{font-size:9px;padding:4px 6px}
+ .question label{margin:5px 0;font-size:11px}
 }
 
 .quiz-image svg{width:min(100%,520px);height:180px}
@@ -127,8 +149,8 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 .question label{display:block;margin:7px 0;cursor:pointer}
 .result{padding:15px;border-radius:14px;background:#edf9f1;font-weight:800;display:none}
 .obs{background:#fff8e9;border:1px solid #f2d59c;border-radius:14px;padding:15px}
-textarea{width:100%;min-height:100px;border:1px solid #ccd8e3;border-radius:12px;padding:12px;font:inherit}
-footer{text-align:center;color:var(--muted);padding:20px}
+textarea{width:100%;min-height:70px;border:1px solid #ccd8e3;border-radius:12px;padding:12px;font:inherit}
+footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 .small{font-size:13px;color:var(--muted)}
 </style>
 </head>
@@ -158,52 +180,28 @@ footer{text-align:center;color:var(--muted);padding:20px}
 <section id="pernafasan" class="card">
 <div class="sim">
 <h2>🌬️ Simulator Pernafasan Manusia</h2>
-<p>Perhatikan <b>udara masuk dan keluar</b> secara berterusan. Tekan organ pada gambar untuk membaca penerangan. Kamu juga boleh <b>seret label</b> ke organ yang betul.</p>
+<p>Perhatikan <b>udara masuk dan keluar</b> secara berterusan. Tekan bahagian organ pada gambar untuk melihat penerangan. Perhatikan animasi udara dan pengembangan paru-paru.</p>
 
 <div class="anatomy-layout">
-<div class="anatomy-visual" id="respVisual">
-<svg viewBox="0 0 720 390" role="img" aria-label="Sistem pernafasan manusia dengan hidung, trakea dan paru-paru">
-<defs>
- <radialGradient id="bodySkin" cx="50%" cy="20%" r="85%"><stop stop-color="#f6d1bd"/><stop offset=".7" stop-color="#c98775"/><stop offset="1" stop-color="#704b55"/></radialGradient>
- <radialGradient id="lung3d" cx="30%" cy="25%" r="85%"><stop stop-color="#ffd1d2"/><stop offset=".42" stop-color="#ee7a83"/><stop offset=".78" stop-color="#c7475a"/><stop offset="1" stop-color="#792d46"/></radialGradient>
- <linearGradient id="tube3d" x1="0" x2="1"><stop stop-color="#f5d7c9"/><stop offset=".5" stop-color="#c98572"/><stop offset="1" stop-color="#7b4c50"/></linearGradient>
- <filter id="softShadow"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-opacity=".28"/></filter>
- <path id="airInPath" d="M356 58 C356 100 356 112 356 142 C356 155 338 160 316 177"/>
-</defs>
-<!-- torso silhouette -->
-<path d="M278 382 C278 322 286 278 303 246 C316 221 333 207 356 199 C379 207 396 221 409 246 C426 278 434 322 434 382Z" fill="url(#bodySkin)" opacity=".24"/>
-<!-- nose / airway -->
-<path d="M356 42 C348 49 345 60 350 69 C354 76 350 83 343 90" fill="none" stroke="#f0c6b4" stroke-width="12" stroke-linecap="round"/>
-<path d="M356 76 L356 146" stroke="url(#tube3d)" stroke-width="20" stroke-linecap="round"/>
-<!-- bronchi -->
-<path d="M356 142 C330 151 300 166 278 189" stroke="url(#tube3d)" stroke-width="17" fill="none" stroke-linecap="round"/>
-<path d="M356 142 C382 151 412 166 434 189" stroke="url(#tube3d)" stroke-width="17" fill="none" stroke-linecap="round"/>
-<!-- lungs -->
-<g filter="url(#softShadow)">
-<path class="lung-shape" d="M338 135 C299 118 252 132 229 174 C208 211 214 292 253 316 C281 333 318 304 331 269 C342 238 346 185 338 135Z" fill="url(#lung3d)"/>
-<path class="lung-shape r" d="M374 135 C413 118 460 132 483 174 C504 211 498 292 459 316 C431 333 394 304 381 269 C370 238 366 185 374 135Z" fill="url(#lung3d)"/>
+<div class="anatomy-visual resp-reference" id="respVisual">
+<div class="resp-image-wrap">
+<img src="respiratory-reference.png" alt="Sistem pernafasan manusia: hidung, trakea, bronkus dan paru-paru">
+<svg class="resp-overlay" viewBox="0 0 360 360" aria-hidden="true">
+<path class="air-path inhale" d="M141 94 C150 105 151 121 151 139 C151 157 151 174 160 188 C168 200 174 211 174 228"/>
+<path class="air-path exhale" d="M219 228 C220 205 212 193 207 181 C202 168 207 148 207 128 C207 113 211 101 219 94"/>
+<g class="air-particles">
+<circle r="4"><animateMotion dur="2.2s" repeatCount="indefinite" path="M141 94 C150 105 151 121 151 139 C151 157 151 174 160 188 C168 200 174 211 174 228"/></circle>
+<circle r="3"><animateMotion dur="2.2s" begin=".55s" repeatCount="indefinite" path="M141 94 C150 105 151 121 151 139 C151 157 151 174 160 188 C168 200 174 211 174 228"/></circle>
+<circle r="3"><animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path="M141 94 C150 105 151 121 151 139 C151 157 151 174 160 188 C168 200 174 211 174 228"/></circle>
 </g>
-<!-- internal bronchi -->
-<g fill="none" stroke="#f8b0aa" stroke-width="5" opacity=".72">
-<path d="M331 190c-28 17-48 37-58 69M331 190c-14 26-20 52-18 77M389 190c28 17 48 37 58 69M389 190c14 26 20 52 18 77"/>
-<path d="M273 228l-26 17M276 242l-22 23M439 228l26 17M436 242l22 23"/>
-</g>
-<!-- diaphragm -->
-<path d="M244 313 Q356 352 468 313" fill="none" stroke="#e8a06e" stroke-width="15" opacity=".75"/>
-<!-- continuous air particles -->
-<g class="air-flow">
- <circle cx="356" cy="53" r="5"/><circle cx="356" cy="76" r="5"/><circle cx="356" cy="100" r="5"/><circle cx="346" cy="153" r="4"/><circle cx="330" cy="165" r="4"/>
-</g>
-<!-- labels -->
-<g font-family="system-ui" font-weight="800" fill="#17324d">
-<rect x="74" y="72" width="112" height="34" rx="17" fill="#fff"/><text x="130" y="95" text-anchor="middle">Hidung</text>
-<rect x="72" y="153" width="112" height="34" rx="17" fill="#fff"/><text x="128" y="176" text-anchor="middle">Trakea</text>
-<rect x="500" y="190" width="126" height="34" rx="17" fill="#fff"/><text x="563" y="213" text-anchor="middle">Paru-paru</text>
-</g>
-<g stroke="#fff" stroke-width="2" opacity=".8"><path d="M186 89h155"/><path d="M184 170h160"/><path d="M500 207H475"/></g>
+<g class="resp-pulse"><ellipse cx="143" cy="213" rx="40" ry="49"/><ellipse cx="217" cy="213" rx="40" ry="49"/></g>
 </svg>
-
+<button class="resp-hotspot nose" type="button" data-organ="hidung" aria-label="Hidung">Hidung</button>
+<button class="resp-hotspot trachea" type="button" data-organ="trakea" aria-label="Trakea">Trakea</button>
+<button class="resp-hotspot lungs" type="button" data-organ="paru" aria-label="Paru-paru">Paru-paru</button>
 </div>
+<div class="resp-note">Udara <span>● masuk</span> → paru-paru mengembang → <em>● keluar</em></div>
+</div></div>
 
 <div class="anatomy-info" id="respInfo">
 <span class="info-pill">Klik organ</span>
@@ -237,7 +235,6 @@ footer{text-align:center;color:var(--muted);padding:20px}
 <div class="process-step"><strong>2. Bergerak</strong>Melalui trakea</div>
 <div class="process-step"><strong>3. Paru-paru</strong>Oksigen digunakan</div>
 <div class="process-step"><strong>4. Keluar</strong>Karbon dioksida dihembus</div>
-</div>
 </div>
 
 <div class="obs">
@@ -357,17 +354,11 @@ footer{text-align:center;color:var(--muted);padding:20px}
 
 <section id="kuiz" class="card">
 <h2>🧠 Kuiz Bergambar — Cabaran Organ Manusia</h2>
-<p class="small">Pilih jawapan berdasarkan gambar. Setiap gambar ialah ilustrasi vector interaktif.</p>
+<p class="small">Pilih jawapan berdasarkan gambar. Gambar organ sebenar/3D digunakan supaya murid lebih mudah mengenal pasti struktur organ.</p>
 
 <div class="question">
 <b>1. Lihat organ dalam gambar. Apakah nama organ yang ditunjukkan?</b>
-<div class="quiz-image">
-<svg viewBox="0 0 420 190" aria-label="Ilustrasi paru-paru">
-<defs><radialGradient id="qL"><stop stop-color="#ffb7bb"/><stop offset=".6" stop-color="#ef6874"/><stop offset="1" stop-color="#9d3044"/></radialGradient></defs>
-<path d="M210 25v62M210 84l-65 38M210 84l65 38" stroke="#c9947f" stroke-width="15" fill="none" stroke-linecap="round"/>
-<path d="M196 70c-45-25-90 7-93 57-2 34 14 46 42 41 39-7 54-34 51-98z" fill="url(#qL)"/>
-<path d="M224 70c45-25 90 7 93 57 2 34-14 46-42 41-39-7-54-34-51-98z" fill="url(#qL)"/>
-</svg></div>
+<div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Ilustrasi sistem pernafasan manusia"></div>
 <label><input type="radio" name="q1" value="a"> A. Paru-paru</label>
 <label><input type="radio" name="q1" value="b"> B. Perut</label>
 <label><input type="radio" name="q1" value="c"> C. Usus besar</label>
@@ -375,14 +366,8 @@ footer{text-align:center;color:var(--muted);padding:20px}
 </div>
 
 <div class="question">
-<b>2. Perhatikan gambar laluan udara. Organ manakah ditunjukkan oleh nombor 2?</b>
-<div class="quiz-image">
-<svg viewBox="0 0 520 190" aria-label="Laluan udara">
-<path d="M260 18v70M260 85L165 142M260 85l95 57" stroke="#d29a82" stroke-width="16" fill="none" stroke-linecap="round"/>
-<path d="M220 75c-55-28-96 11-90 66 5 33 32 38 65 20 26-14 32-42 25-86z" fill="#ef707a"/>
-<path d="M300 75c55-28 96 11 90 66-5 33-32 38-65 20-26-14-32-42-25-86z" fill="#ef707a"/>
-<circle cx="260" cy="87" r="18" fill="#ffd36b"/><text x="274" y="74" font-size="28" font-weight="800" fill="#17324d">2</text>
-</svg></div>
+<b>2. Berdasarkan gambar sistem pernafasan, salur udara yang membawa udara menuju paru-paru ialah...</b>
+<div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Ilustrasi organ pernafasan manusia"></div>
 <label><input type="radio" name="q2" value="a"> A. Paru-paru</label>
 <label><input type="radio" name="q2" value="b"> B. Trakea</label>
 <label><input type="radio" name="q2" value="c"> C. Usus kecil</label>
@@ -390,34 +375,21 @@ footer{text-align:center;color:var(--muted);padding:20px}
 </div>
 
 <div class="question">
-<b>3. Gambar menunjukkan makanan bergerak melalui sistem pencernaan. Organ manakah yang menerima makanan selepas esofagus?</b>
-<div class="quiz-image">
-<svg viewBox="0 0 520 190" aria-label="Sistem pencernaan">
-<path d="M260 18v40c0 20-35 15-35 42 0 19 20 23 34 31 15 8 36 20 39 37" fill="none" stroke="#d58f75" stroke-width="13"/>
-<path d="M291 82c46 3 64 36 39 59-19 18-54 9-64-11-9-18 1-48 25-48z" fill="#f29a76"/>
-<path d="M220 129c-46-17-86 6-76 31 10 25 58 8 80-6M300 130c42-16 74 4 67 27-8 25-48 10-71-2" fill="none" stroke="#8a58c7" stroke-width="12" stroke-linecap="round"/>
-<circle cx="330" cy="115" r="7" fill="#f8d26a"/>
-</svg></div>
-<label><input type="radio" name="q3" value="a"> A. Perut</label>
-<label><input type="radio" name="q3" value="b"> B. Paru-paru</label>
-<label><input type="radio" name="q3" value="c"> C. Hidung</label>
+<b>3. Perhatikan gambar 3D organ pencernaan. Bahagian yang berlingkar di bahagian tengah ialah...</b>
+<div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Ilustrasi 3D usus besar dan usus kecil manusia"></div>
+<label><input type="radio" name="q3" value="a"> A. Usus kecil</label>
+<label><input type="radio" name="q3" value="b"> B. Usus besar</label>
+<label><input type="radio" name="q3" value="c"> C. Rektum</label>
 <label><input type="radio" name="q3" value="d"> D. Trakea</label>
 </div>
 
 <div class="question">
-<b>4. Apakah proses yang berkaitan dengan gambar berikut?</b>
-<div class="quiz-image">
-<svg viewBox="0 0 520 190" aria-label="Tinja disingkirkan">
-<path d="M270 22v38c0 17-27 15-27 38 0 18 18 25 31 34 13 9 23 22 23 39" fill="none" stroke="#d28e76" stroke-width="13"/>
-<path d="M222 117c-34-16-64 0-57 25 7 25 42 14 61 2M301 118c34-16 64 0 57 25-7 25-42 14-61 2" fill="none" stroke="#7d5ab6" stroke-width="12" stroke-linecap="round"/>
-<path d="M270 142v32" stroke="#27ae60" stroke-width="13" stroke-linecap="round"/>
-<circle cx="270" cy="178" r="9" fill="#7b61ff"/>
-<text x="292" y="181" font-size="18" font-weight="800" fill="#17324d">Tinja</text>
-</svg></div>
-<label><input type="radio" name="q4" value="a"> A. Pernafasan</label>
-<label><input type="radio" name="q4" value="b"> B. Penyahtinjaan</label>
-<label><input type="radio" name="q4" value="c"> C. Peredaran darah</label>
-<label><input type="radio" name="q4" value="d"> D. Pergerakan</label>
+<b>4. Berdasarkan gambar 3D, bahan makanan yang tidak diperlukan akhirnya...</b>
+<div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Ilustrasi 3D sistem usus manusia"></div>
+<label><input type="radio" name="q4" value="a"> A. Diserap sebagai oksigen</label>
+<label><input type="radio" name="q4" value="b"> B. Disingkirkan sebagai tinja</label>
+<label><input type="radio" name="q4" value="c"> C. Bertukar menjadi darah</label>
+<label><input type="radio" name="q4" value="d"> D. Masuk ke dalam paru-paru</label>
 </div>
 
 <div class="question">
@@ -507,7 +479,7 @@ function quiz(){
  r.textContent=`Pencapaian kamu: ${score}/5. `+(score===5?'Tahniah! Cemerlang! 🎉':score>=3?'Bagus! Cuba semak semula bahagian yang belum tepat.':'Teruskan belajar dan cuba lagi! 💪');
 }
 
-document.querySelectorAll('#respVisual .organ-hotspot').forEach(el=>el.addEventListener('click',()=>setRespInfo(el.dataset.organ)));
+document.querySelectorAll('#respVisual .resp-hotspot').forEach(el=>el.addEventListener('click',()=>setRespInfo(el.dataset.organ)));
 document.querySelectorAll('#respInfo [data-organ]').forEach(btn=>btn.addEventListener('click',()=>setRespInfo(btn.dataset.organ)));
 document.querySelectorAll('#digestVisual .digest-organ').forEach(el=>el.addEventListener('click',()=>setDigestInfo(el.dataset.organ)));
 document.querySelectorAll('[data-digest-organ]').forEach(btn=>btn.addEventListener('click',()=>setDigestInfo(btn.dataset.digestOrgan)));
