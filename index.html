@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sains Tahun 4 — Manusia: Pernafasan & Penyahtinjaan</title>
+<style>
+:root{
+ --bg:#f5f8ff;--card:#fff;--ink:#17324d;--muted:#5e7488;--blue:#2f80ed;
+ --cyan:#27aecc;--green:#27ae60;--orange:#f2994a;--red:#eb5757;--purple:#7b61ff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,#173b70,#2478d8);color:#fff;padding:28px 18px 34px}
+.wrap{max-width:1100px;margin:auto}
+.badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:6px 12px;border-radius:99px;font-size:13px}
+h1{font-size:clamp(28px,5vw,48px);margin:12px 0 6px;line-height:1.05}
+.subtitle{opacity:.9;font-size:16px}
+nav{position:sticky;top:0;z-index:5;background:#ffffffee;backdrop-filter:blur(10px);border-bottom:1px solid #dfe7ef}
+.navin{display:flex;gap:8px;overflow:auto;padding:9px 12px;max-width:1100px;margin:auto}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink);font-weight:700;padding:9px 13px;border-radius:10px}
+nav a:hover{background:#eaf2ff}
+main{padding:22px 14px 50px}
+.card{background:var(--card);border:1px solid #e0e8f1;border-radius:20px;padding:22px;margin:16px 0;box-shadow:0 8px 25px #16324d0b}
+h2{margin-top:0;font-size:27px}
+h3{margin-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
+.info{padding:16px;border-radius:15px;background:#f7faff;border-left:5px solid var(--blue)}
+.info.green{border-left-color:var(--green)} .info.orange{border-left-color:var(--orange)}
+button{border:0;border-radius:12px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--blue);color:#fff}
+button.secondary{background:#e9f1fb;color:var(--ink)}
+button.green{background:var(--green)} button.orange{background:var(--orange)}
+.controls{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}
+.sim{background:#10283d;color:#fff;border-radius:20px;padding:20px;overflow:hidden}
+.sim h2,.sim h3{color:#fff}
+.lungs{height:280px;display:flex;align-items:center;justify-content:center;gap:22px;position:relative}
+.lung{width:105px;height:145px;background:#ef6b73;border-radius:55% 45% 48% 52%;box-shadow:inset -12px -15px 20px #b63f4c88;transition:.8s}
+.lung.left{transform-origin:right center}.lung.right{transform-origin:left center}
+.lungs.breathe .lung{transform:scaleY(1.13) scaleX(1.08)}
+.trachea{position:absolute;top:20px;width:18px;height:110px;background:#d9b5a0;border-radius:10px}
+.branch{position:absolute;width:75px;height:10px;background:#d9b5a0;border-radius:10px;top:118px}
+.branch.l{transform:rotate(35deg);left:calc(50% - 78px)}.branch.r{transform:rotate(-35deg);right:calc(50% - 78px)}
+.air{height:13px;background:#42d7ff;border-radius:20px;position:absolute;top:24px;left:calc(50% - 6px);width:12px;opacity:0}
+.lungs.breathe .air{animation:air 1.2s infinite}
+.organ-stage{height:330px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:18px;background:radial-gradient(circle at 50% 42%,#183e59,#0b2032 70%);margin:4px 0 12px}
+.human-svg{width:min(680px,100%);height:100%;overflow:visible}
+.human-svg .lung{transform-box:fill-box;transform-origin:center;transition:transform .75s cubic-bezier(.2,.8,.2,1)}
+.human-svg .lung.left{transform-origin:90% 50%}.human-svg .lung.right{transform-origin:10% 50%}
+.organ-stage.breathe .lung.left{transform:scale(1.09,1.12)}
+.organ-stage.breathe .lung.right{transform:scale(1.09,1.12)}
+.air-particles circle{opacity:.15;transition:.4s}
+.organ-stage.breathe .air-particles circle{opacity:1;animation:airFloat 1.1s infinite alternate}
+.organ-stage.breathe .air-particles circle:nth-child(2){animation-delay:.2s}
+.organ-stage.breathe .air-particles circle:nth-child(3){animation-delay:.35s}
+.organ-stage.breathe .air-particles circle:nth-child(4){animation-delay:.5s}
+@keyframes airFloat{from{transform:translateY(0);opacity:.35}to{transform:translateY(58px);opacity:1}}
+.organ-caption{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#061522cc;border:1px solid #ffffff22;padding:7px 14px;border-radius:99px;font-size:13px;color:#dff7ff;white-space:nowrap}
+.organ-caption span{font-size:16px}
+
+@keyframes air{0%{top:20px;opacity:0}35%{opacity:1}100%{top:155px;opacity:0}}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.read{background:#ffffff12;border:1px solid #ffffff1f;border-radius:12px;padding:12px;text-align:center}
+.read strong{display:block;font-size:24px;color:#6ee7ff}
+.bar{height:16px;background:#ffffff1a;border-radius:20px;overflow:hidden;margin:8px 0 14px}
+.fill{height:100%;width:50%;background:#42d7ff;border-radius:20px;transition:.5s}
+.digest{min-height:260px;display:flex;align-items:center;justify-content:center;position:relative}
+.bodytube{width:145px;height:220px;border:13px solid #f2994a;border-top-color:#f6c05f;border-bottom-color:#27ae60;border-radius:70px;position:relative}
+.food{position:absolute;width:22px;height:22px;border-radius:50%;background:#f8d26a;left:48px;top:5px;transition:top 2s,background 1s}
+.food.move{top:175px;background:#7b61ff}
+.organ-label{position:absolute;left:calc(50% + 95px);font-weight:800}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.step{padding:14px;border-radius:14px;background:#f8fafc;border:1px solid #e3e9ef}
+.step b{display:block;color:var(--blue);margin-bottom:4px}
+.question{padding:15px;border:1px solid #e2e8f0;border-radius:14px;margin:10px 0}
+.quiz-image{margin:12px 0;padding:10px;border-radius:15px;background:linear-gradient(135deg,#eef7ff,#ffffff);border:1px solid #dce9f5;display:flex;justify-content:center}
+.quiz-image svg{width:min(100%,520px);height:180px}
+.quiz-image.split{gap:8px}
+.quiz-image.split>div{flex:1}
+.quiz-image.split svg{height:145px}
+
+.question label{display:block;margin:7px 0;cursor:pointer}
+.result{padding:15px;border-radius:14px;background:#edf9f1;font-weight:800;display:none}
+.obs{background:#fff8e9;border:1px solid #f2d59c;border-radius:14px;padding:15px}
+textarea{width:100%;min-height:100px;border:1px solid #ccd8e3;border-radius:12px;padding:12px;font:inherit}
+footer{text-align:center;color:var(--muted);padding:20px}
+.small{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<span class="badge">SAINS TAHUN 4 • MANUSIA</span>
+<h1>Pernafasan & Penyahtinjaan</h1>
+<div class="subtitle">Teroka, uji simulator dan buat pemerhatian seperti seorang ahli sains.</div>
+</div>
+</header>
+
+<nav><div class="navin">
+<a href="#mula">Mula</a><a href="#pernafasan">🌬️ Pernafasan</a><a href="#penyahtinjaan">🍎 Penyahtinjaan</a><a href="#kuiz">🧠 Kuiz</a>
+</div></nav>
+
+<main class="wrap">
+<section id="mula" class="card">
+<h2>🎯 Apa yang akan kamu pelajari?</h2>
+<div class="grid">
+<div class="info"><b>1. Pernafasan</b><p>Kenal pasti laluan udara dan peranan organ pernafasan. Uji perubahan kadar pernafasan.</p></div>
+<div class="info green"><b>2. Penyahtinjaan</b><p>Fahami bagaimana bahan makanan yang tidak diperlukan disingkirkan sebagai tinja.</p></div>
+<div class="info orange"><b>3. Kemahiran proses sains</b><p>Manipulasikan pemboleh ubah, buat pemerhatian dan catat dapatan.</p></div>
+</div>
+</section>
+
+<section id="pernafasan" class="card">
+<div class="sim">
+<h2>🌬️ Simulator Pernafasan</h2>
+<p>Uji keadaan <b>rehat</b> dan <b>selepas aktiviti fizikal</b>. Tekan butang dan perhatikan pergerakan paru-paru.</p>
+<div class="organ-stage" id="lungs">
+<svg class="human-svg" viewBox="0 0 620 330" role="img" aria-label="Ilustrasi 3D vector sistem pernafasan manusia">
+<defs>
+ <radialGradient id="lungGradL" cx="35%" cy="28%" r="80%">
+  <stop offset="0%" stop-color="#ffb0b5"/><stop offset="48%" stop-color="#f06b76"/><stop offset="100%" stop-color="#a92f45"/>
+ </radialGradient>
+ <radialGradient id="lungGradR" cx="35%" cy="28%" r="80%">
+  <stop offset="0%" stop-color="#ffc0c3"/><stop offset="48%" stop-color="#ed6874"/><stop offset="100%" stop-color="#9d2b42"/>
+ </radialGradient>
+ <linearGradient id="tubeGrad" x1="0" x2="1">
+  <stop stop-color="#f5d2bf"/><stop offset=".5" stop-color="#c98973"/><stop offset="1" stop-color="#8c514d"/>
+ </linearGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".3"/></filter>
+</defs>
+<ellipse cx="310" cy="305" rx="190" ry="14" fill="#000" opacity=".16"/>
+<!-- trachea -->
+<path d="M310 34 C299 34 294 43 294 55 L294 126" stroke="url(#tubeGrad)" stroke-width="24" fill="none" stroke-linecap="round"/>
+<path d="M326 34 C337 34 342 43 342 55 L342 126" stroke="#f4cbbb" stroke-width="9" fill="none" opacity=".7"/>
+<!-- bronchi -->
+<path d="M306 121 C279 132 252 146 226 168" stroke="url(#tubeGrad)" stroke-width="20" fill="none" stroke-linecap="round"/>
+<path d="M326 121 C353 132 380 146 406 168" stroke="url(#tubeGrad)" stroke-width="20" fill="none" stroke-linecap="round"/>
+<!-- lungs -->
+<g filter="url(#shadow)">
+<path class="lung left" d="M289 106 C250 91 194 105 169 149 C147 188 155 263 191 286 C216 302 257 283 276 252 C292 225 297 178 289 106Z" fill="url(#lungGradL)"/>
+<path class="lung right" d="M331 106 C370 91 426 105 451 149 C473 188 465 263 429 286 C404 302 363 283 344 252 C328 225 323 178 331 106Z" fill="url(#lungGradR)"/>
+</g>
+<!-- highlights / lobes -->
+<path d="M190 157 C215 125 250 123 268 137" fill="none" stroke="#ffdadd" stroke-width="13" opacity=".38" stroke-linecap="round"/>
+<path d="M430 157 C405 125 370 123 352 137" fill="none" stroke="#ffdadd" stroke-width="13" opacity=".34" stroke-linecap="round"/>
+<path d="M194 235 C220 260 244 264 262 247" fill="none" stroke="#8e243d" stroke-width="9" opacity=".28" stroke-linecap="round"/>
+<path d="M426 235 C400 260 376 264 358 247" fill="none" stroke="#8e243d" stroke-width="9" opacity=".25" stroke-linecap="round"/>
+<!-- air particles -->
+<g class="air-particles">
+ <circle cx="310" cy="48" r="5" fill="#5fe7ff"/><circle cx="310" cy="76" r="5" fill="#5fe7ff"/>
+ <circle cx="284" cy="137" r="4" fill="#5fe7ff"/><circle cx="336" cy="137" r="4" fill="#5fe7ff"/>
+</g>
+</svg>
+<div class="organ-caption"><span>🫁</span> Paru-paru manusia</div>
+</div>
+<div class="controls">
+<button onclick="breath('rest')">🧘 Keadaan Rehat</button>
+<button class="orange" onclick="breath('active')">🏃 Selepas Aktiviti</button>
+<button class="secondary" onclick="stopBreath()">⏸ Berhenti</button>
+</div>
+<div class="readout">
+<div class="read"><span>Kadar pernafasan</span><strong id="rate">18</strong><span>kali/min</span></div>
+<div class="read"><span>Keadaan</span><strong id="state">Rehat</strong></div>
+<div class="read"><span>Udara diperlukan</span><strong id="airv">Sederhana</strong></div>
+</div>
+<div style="margin-top:15px">Kadar pernafasan
+<div class="bar"><div class="fill" id="breathbar"></div></div></div>
+</div>
+<div class="obs">
+<h3>🔎 Pemerhatian kamu</h3>
+<p>Bandingkan kedua-dua keadaan. Apakah yang berubah apabila seseorang melakukan aktiviti fizikal?</p>
+<textarea id="obsBreath" placeholder="Tulis pemerhatian kamu di sini..."></textarea>
+</div>
+</section>
+
+<section class="card">
+<h2>🫁 Laluan udara</h2>
+<div class="steps">
+<div class="step"><b>1. Hidung</b>Udara masuk dan ditapis.</div>
+<div class="step"><b>2. Trakea</b>Udara bergerak menuju paru-paru.</div>
+<div class="step"><b>3. Bronkus</b>Udara dibawa ke paru-paru kiri dan kanan.</div>
+<div class="step"><b>4. Paru-paru</b>Pertukaran gas berlaku. Oksigen digunakan oleh badan.</div>
+</div>
+</section>
+
+<section id="penyahtinjaan" class="card">
+<div class="sim">
+<h2>🍎 Simulator Penyahtinjaan</h2>
+<p>Tekan <b>Mulakan perjalanan makanan</b> dan perhatikan bagaimana bahan makanan bergerak melalui sistem pencernaan.</p>
+<div class="digest">
+<div class="bodytube"><div class="food" id="food"></div></div>
+<div class="organ-label" id="digestLabel">Mulut</div>
+</div>
+<div class="controls">
+<button class="green" onclick="digest()">▶ Mulakan perjalanan makanan</button>
+<button class="secondary" onclick="resetDigest()">↺ Ulang</button>
+</div>
+<div class="readout">
+<div class="read"><span>Kedudukan</span><strong id="digestPos">Mulut</strong></div>
+<div class="read"><span>Bahan diperlukan</span><strong id="needed">Diserap</strong></div>
+<div class="read"><span>Baki</span><strong id="waste">Belum</strong></div>
+</div>
+</div>
+<div class="obs">
+<h3>🔎 Pemerhatian kamu</h3>
+<p>Apakah yang berlaku kepada makanan yang tidak diperlukan oleh badan?</p>
+<textarea id="obsDigest" placeholder="Tulis pemerhatian kamu di sini..."></textarea>
+</div>
+</section>
+
+<section class="card">
+<h2>🧠 Ringkasan</h2>
+<div class="grid">
+<div class="info"><b>Pernafasan</b><p>Manusia menyedut udara yang mengandungi oksigen dan menghembus udara yang mengandungi lebih banyak karbon dioksida.</p></div>
+<div class="info green"><b>Penyahtinjaan</b><p>Penyahtinjaan ialah proses menyingkirkan tinja, iaitu bahan makanan yang tidak tercerna dan tidak diperlukan oleh badan.</p></div>
+</div>
+</section>
+
+<section id="kuiz" class="card">
+<h2>🧠 Kuiz Bergambar — Cabaran Organ Manusia</h2>
+<p class="small">Pilih jawapan berdasarkan gambar. Setiap gambar ialah ilustrasi vector interaktif.</p>
+
+<div class="question">
+<b>1. Lihat organ dalam gambar. Apakah nama organ yang ditunjukkan?</b>
+<div class="quiz-image">
+<svg viewBox="0 0 420 190" aria-label="Ilustrasi paru-paru">
+<defs><radialGradient id="qL"><stop stop-color="#ffb7bb"/><stop offset=".6" stop-color="#ef6874"/><stop offset="1" stop-color="#9d3044"/></radialGradient></defs>
+<path d="M210 25v62M210 84l-65 38M210 84l65 38" stroke="#c9947f" stroke-width="15" fill="none" stroke-linecap="round"/>
+<path d="M196 70c-45-25-90 7-93 57-2 34 14 46 42 41 39-7 54-34 51-98z" fill="url(#qL)"/>
+<path d="M224 70c45-25 90 7 93 57 2 34-14 46-42 41-39-7-54-34-51-98z" fill="url(#qL)"/>
+</svg></div>
+<label><input type="radio" name="q1" value="a"> A. Paru-paru</label>
+<label><input type="radio" name="q1" value="b"> B. Perut</label>
+<label><input type="radio" name="q1" value="c"> C. Usus besar</label>
+<label><input type="radio" name="q1" value="d"> D. Jantung</label>
+</div>
+
+<div class="question">
+<b>2. Perhatikan gambar laluan udara. Organ manakah ditunjukkan oleh nombor 2?</b>
+<div class="quiz-image">
+<svg viewBox="0 0 520 190" aria-label="Laluan udara">
+<path d="M260 18v70M260 85L165 142M260 85l95 57" stroke="#d29a82" stroke-width="16" fill="none" stroke-linecap="round"/>
+<path d="M220 75c-55-28-96 11-90 66 5 33 32 38 65 20 26-14 32-42 25-86z" fill="#ef707a"/>
+<path d="M300 75c55-28 96 11 90 66-5 33-32 38-65 20-26-14-32-42-25-86z" fill="#ef707a"/>
+<circle cx="260" cy="87" r="18" fill="#ffd36b"/><text x="274" y="74" font-size="28" font-weight="800" fill="#17324d">2</text>
+</svg></div>
+<label><input type="radio" name="q2" value="a"> A. Paru-paru</label>
+<label><input type="radio" name="q2" value="b"> B. Trakea</label>
+<label><input type="radio" name="q2" value="c"> C. Usus kecil</label>
+<label><input type="radio" name="q2" value="d"> D. Rektum</label>
+</div>
+
+<div class="question">
+<b>3. Gambar menunjukkan makanan bergerak melalui sistem pencernaan. Organ manakah yang menerima makanan selepas esofagus?</b>
+<div class="quiz-image">
+<svg viewBox="0 0 520 190" aria-label="Sistem pencernaan">
+<path d="M260 18v40c0 20-35 15-35 42 0 19 20 23 34 31 15 8 36 20 39 37" fill="none" stroke="#d58f75" stroke-width="13"/>
+<path d="M291 82c46 3 64 36 39 59-19 18-54 9-64-11-9-18 1-48 25-48z" fill="#f29a76"/>
+<path d="M220 129c-46-17-86 6-76 31 10 25 58 8 80-6M300 130c42-16 74 4 67 27-8 25-48 10-71-2" fill="none" stroke="#8a58c7" stroke-width="12" stroke-linecap="round"/>
+<circle cx="330" cy="115" r="7" fill="#f8d26a"/>
+</svg></div>
+<label><input type="radio" name="q3" value="a"> A. Perut</label>
+<label><input type="radio" name="q3" value="b"> B. Paru-paru</label>
+<label><input type="radio" name="q3" value="c"> C. Hidung</label>
+<label><input type="radio" name="q3" value="d"> D. Trakea</label>
+</div>
+
+<div class="question">
+<b>4. Apakah proses yang berkaitan dengan gambar berikut?</b>
+<div class="quiz-image">
+<svg viewBox="0 0 520 190" aria-label="Tinja disingkirkan">
+<path d="M270 22v38c0 17-27 15-27 38 0 18 18 25 31 34 13 9 23 22 23 39" fill="none" stroke="#d28e76" stroke-width="13"/>
+<path d="M222 117c-34-16-64 0-57 25 7 25 42 14 61 2M301 118c34-16 64 0 57 25-7 25-42 14-61 2" fill="none" stroke="#7d5ab6" stroke-width="12" stroke-linecap="round"/>
+<path d="M270 142v32" stroke="#27ae60" stroke-width="13" stroke-linecap="round"/>
+<circle cx="270" cy="178" r="9" fill="#7b61ff"/>
+<text x="292" y="181" font-size="18" font-weight="800" fill="#17324d">Tinja</text>
+</svg></div>
+<label><input type="radio" name="q4" value="a"> A. Pernafasan</label>
+<label><input type="radio" name="q4" value="b"> B. Penyahtinjaan</label>
+<label><input type="radio" name="q4" value="c"> C. Peredaran darah</label>
+<label><input type="radio" name="q4" value="d"> D. Pergerakan</label>
+</div>
+
+<div class="question">
+<b>5. Bandingkan dua gambar. Apakah pemerhatian yang paling tepat?</b>
+<div class="quiz-image split">
+<div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="55" ry="62" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Rehat</text></svg></div>
+<div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="68" ry="72" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Aktiviti</text></svg></div>
+</div>
+<label><input type="radio" name="q5" value="a"> A. Kadar pernafasan meningkat selepas aktiviti</label>
+<label><input type="radio" name="q5" value="b"> B. Kadar pernafasan menjadi sifar selepas aktiviti</label>
+<label><input type="radio" name="q5" value="c"> C. Manusia tidak memerlukan oksigen ketika aktiviti</label>
+<label><input type="radio" name="q5" value="d"> D. Paru-paru berhenti berfungsi ketika aktiviti</label>
+</div>
+
+<button onclick="quiz()">Semak Jawapan</button>
+<div class="result" id="result"></div>
+</section>
+</main>
+<footer>Sains Tahun 4 • Aktiviti interaktif untuk pembelajaran murid</footer>
+
+<script>
+let timer=null;
+function breath(mode){
+ clearInterval(timer);
+ const active=mode==='active';
+ document.getElementById('rate').textContent=active?30:18;
+ document.getElementById('state').textContent=active?'Selepas aktiviti':'Rehat';
+ document.getElementById('airv').textContent=active?'Lebih tinggi':'Sederhana';
+ document.getElementById('breathbar').style.width=active?'82%':'48%';
+ const lungs=document.getElementById('lungs');
+ lungs.classList.add('breathe');
+ timer=setInterval(()=>lungs.classList.toggle('breathe'),active?650:1050);
+}
+function stopBreath(){
+ clearInterval(timer);
+ document.getElementById('lungs').classList.remove('breathe');
+}
+let dTimer=null;
+function digest(){
+ clearInterval(dTimer);
+ const food=document.getElementById('food'), label=document.getElementById('digestLabel');
+ const pos=document.getElementById('digestPos'), need=document.getElementById('needed'), waste=document.getElementById('waste');
+ food.classList.remove('move'); food.style.top='5px';
+ const stages=[
+  ['Mulut','Makanan dikunyah','Belum','0px'],
+  ['Perut','Makanan dicernakan','Sebahagian dicerna','65px'],
+  ['Usus kecil','Nutrien diserap','Diserap ke dalam badan','125px'],
+  ['Usus besar','Air diserap','Bahan tidak diperlukan kekal','155px'],
+  ['Rektum / dubur','Tinja terkumpul dan disingkirkan','Tinja','175px']
+ ];
+ let i=0;
+ function step(){
+   if(i>=stages.length){clearInterval(dTimer);return}
+   const s=stages[i]; label.textContent=s[0];pos.textContent=s[0];need.textContent=s[1];waste.textContent=s[2];food.style.top=s[3];i++;
+ }
+ step(); dTimer=setInterval(step,1800);
+}
+function resetDigest(){
+ clearInterval(dTimer);
+ document.getElementById('food').style.top='5px';
+ document.getElementById('digestLabel').textContent='Mulut';
+ document.getElementById('digestPos').textContent='Mulut';
+ document.getElementById('needed').textContent='Diserap';
+ document.getElementById('waste').textContent='Belum';
+}
+function quiz(){
+ const ans={q1:'a',q2:'b',q3:'a',q4:'b',q5:'a'};let score=0;
+ Object.keys(ans).forEach(q=>{const x=document.querySelector('input[name="'+q+'"]:checked');if(x&&x.value===ans[q])score++});
+ const r=document.getElementById('result');r.style.display='block';
+ r.textContent=`Pencapaian kamu: ${score}/5. `+(score===5?'Tahniah! Cemerlang! 🎉':score>=3?'Bagus! Cuba semak semula bahagian yang belum tepat.':'Teruskan belajar dan cuba lagi! 💪');
+}
+</script>
+</body>
+</html>
