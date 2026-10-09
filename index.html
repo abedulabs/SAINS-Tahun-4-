@@ -152,6 +152,21 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 textarea{width:100%;min-height:70px;border:1px solid #ccd8e3;border-radius:12px;padding:12px;font:inherit}
 footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 .small{font-size:13px;color:var(--muted)}
+
+/* Sistem markah dan pemerhatian interaktif */
+.score-panel{background:linear-gradient(135deg,#0f3150,#174f78);color:#fff;border-radius:12px;padding:10px 12px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.score-total{font-size:24px;font-weight:900;color:#6de0ff}.score-meta{font-size:11px;opacity:.9}.score-track{height:7px;background:#ffffff20;border-radius:99px;overflow:hidden;flex:1;min-width:150px}.score-track i{display:block;height:100%;width:0;background:#6de0ff;border-radius:99px;transition:.4s}
+.activity-score{font-size:10px;font-weight:800;color:#6de0ff;margin-top:5px}
+.obs-interactive{background:#fff8e9;border:1px solid #f2d59c;border-radius:12px;padding:11px;margin-top:9px}
+.obs-q{background:#fff;border:1px solid #eadfc7;border-radius:9px;padding:8px;margin:7px 0;font-size:11px}
+.obs-q b{display:block;margin-bottom:5px}
+.obs-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+.obs-options label{display:block;border:1px solid #d9e2e9;border-radius:7px;padding:6px;background:#f8fbfd;cursor:pointer}
+.obs-options input{margin-right:5px}
+.obs-result{font-weight:800;font-size:11px;margin-top:7px;display:none}
+.final-score{background:#edf9f1;border:1px solid #bfe5ca;border-radius:12px;padding:12px;margin-top:10px;display:none}
+.final-score strong{font-size:24px}
+@media(max-width:600px){.score-panel{align-items:flex-start}.score-track{order:3;flex-basis:100%}.obs-options{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -168,6 +183,11 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 </div></nav>
 
 <main class="wrap">
+<div class="score-panel" aria-live="polite">
+  <div><div class="score-meta">MARKAH PEMBELAJARAN</div><div><span class="score-total" id="totalScore">0</span> <span>/ 50</span></div></div>
+  <div class="score-track"><i id="scoreFill"></i></div>
+  <div class="score-meta" id="scoreStatus">Lengkapkan aktiviti untuk mengumpul markah.</div>
+</div>
 <section id="mula" class="card">
 <h2>🎯 Apa yang akan kamu pelajari?</h2>
 <div class="grid">
@@ -179,7 +199,7 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 
 <section id="pernafasan" class="card">
 <div class="sim">
-<h2>🌬️ Simulator Pernafasan Manusia</h2>
+<h2>🌬️ Simulator Pernafasan Manusia</h2><div class="activity-score">AKTIVITI 1 • 5 MARKAH</div>
 <p>Perhatikan <b>udara masuk dan keluar</b> secara berterusan. Tekan bahagian organ pada gambar untuk melihat penerangan. Perhatikan animasi udara dan pengembangan paru-paru.</p>
 
 <div class="anatomy-layout">
@@ -237,26 +257,35 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 <div class="process-step"><strong>4. Keluar</strong>Karbon dioksida dihembus</div>
 </div>
 
-<div class="obs">
-<h3>🔎 Pemerhatian kamu</h3>
-<p>Bandingkan keadaan rehat dengan selepas aktiviti fizikal. Apakah perubahan pada kadar pernafasan dan pergerakan paru-paru?</p>
-<textarea id="obsBreath" placeholder="Tulis pemerhatian kamu di sini..."></textarea>
+<div class="obs-interactive" id="breathObs">
+<h3>🔎 Pemerhatian Interaktif • 5 Markah</h3>
+<p>Perhatikan simulator dalam keadaan <b>Rehat</b> dan <b>Selepas Aktiviti</b>. Pilih pemerhatian yang betul.</p>
+<div class="obs-q"><b>1. Selepas aktiviti, kadar pernafasan...</b><div class="obs-options"><label><input type="radio" name="bo1" value="a"> meningkat</label><label><input type="radio" name="bo1" value="b"> menurun</label></div></div>
+<div class="obs-q"><b>2. Selepas aktiviti, paru-paru kelihatan...</b><div class="obs-options"><label><input type="radio" name="bo2" value="a"> lebih aktif mengembang</label><label><input type="radio" name="bo2" value="b"> tidak bergerak</label></div></div>
+<div class="obs-q"><b>3. Apakah yang diperlukan lebih banyak ketika aktiviti?</b><div class="obs-options"><label><input type="radio" name="bo3" value="a"> oksigen</label><label><input type="radio" name="bo3" value="b"> tinja</label></div></div>
+<button type="button" class="orange" onclick="checkBreathObs()">Semak Pemerhatian</button><div class="obs-result" id="breathObsResult"></div>
 </div>
 </section>
 
 <section class="card">
-<h2>🫁 Laluan udara</h2>
+<h2>🫁 Laluan udara</h2><div class="activity-score">AKTIVITI 3 • 5 MARKAH</div>
 <div class="steps">
 <div class="step"><b>1. Hidung</b>Udara masuk dan ditapis.</div>
 <div class="step"><b>2. Trakea</b>Udara bergerak menuju paru-paru.</div>
 <div class="step"><b>3. Bronkus</b>Udara dibawa ke paru-paru kiri dan kanan.</div>
 <div class="step"><b>4. Paru-paru</b>Pertukaran gas berlaku. Oksigen digunakan oleh badan.</div>
 </div>
+<div class="obs-interactive" id="airPathCheck">
+<h3>⚡ Cabaran Laluan Udara • 5 Markah</h3>
+<p>Pilih urutan laluan udara yang betul.</p>
+<div class="obs-q"><div class="obs-options"><label><input type="radio" name="pathq" value="a"> Hidung → Trakea → Bronkus → Paru-paru</label><label><input type="radio" name="pathq" value="b"> Paru-paru → Hidung → Trakea → Bronkus</label></div></div>
+<button type="button" onclick="checkAirPath()">Semak Urutan</button><div class="obs-result" id="airPathResult"></div>
+</div>
 </section>
 
 <section id="penyahtinjaan" class="card">
 <div class="sim">
-<h2>🍎 Simulator Penyahtinjaan</h2>
+<h2>🍎 Simulator Penyahtinjaan</h2><div class="activity-score">AKTIVITI 4 • 5 MARKAH</div>
 <p>Perhatikan <b>nutrien diserap di usus kecil</b> dan bahan yang tidak diperlukan bergerak ke <b>usus besar → rektum → dubur</b> sebagai tinja.</p>
 
 <div class="anatomy-layout">
@@ -337,10 +366,13 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 </div>
 </div>
 
-<div class="obs">
-<h3>🔎 Pemerhatian kamu</h3>
-<p>Perhatikan bola coklat bergerak dari usus kecil ke usus besar, rektum dan akhirnya keluar melalui dubur. Apakah yang berlaku kepada bahan makanan yang tidak diperlukan?</p>
-<textarea id="obsDigest" placeholder="Tulis pemerhatian kamu di sini..."></textarea>
+<div class="obs-interactive" id="digestObs">
+<h3>🔎 Pemerhatian Interaktif • 5 Markah</h3>
+<p>Perhatikan perjalanan bahan makanan dalam simulator dan pilih pemerhatian yang tepat.</p>
+<div class="obs-q"><b>1. Di manakah nutrien diserap?</b><div class="obs-options"><label><input type="radio" name="do1" value="a"> Usus kecil</label><label><input type="radio" name="do1" value="b"> Usus besar</label></div></div>
+<div class="obs-q"><b>2. Bahan yang tidak diperlukan menjadi...</b><div class="obs-options"><label><input type="radio" name="do2" value="a"> tinja</label><label><input type="radio" name="do2" value="b"> oksigen</label></div></div>
+<div class="obs-q"><b>3. Tinja disimpan sementara di...</b><div class="obs-options"><label><input type="radio" name="do3" value="a"> rektum</label><label><input type="radio" name="do3" value="b"> paru-paru</label></div></div>
+<button type="button" class="green" onclick="checkDigestObs()">Semak Pemerhatian</button><div class="obs-result" id="digestObsResult"></div>
 </div>
 </section>
 
@@ -352,60 +384,52 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 </div>
 </section>
 
+<div class="obs-interactive"><b>📊 Agihan Markah</b><div class="grid" style="margin-top:7px"><div class="step">Simulator pernafasan <b>5</b></div><div class="step">Pemerhatian pernafasan <b>5</b></div><div class="step">Laluan udara <b>5</b></div><div class="step">Simulator penyahtinjaan <b>5</b></div><div class="step">Pemerhatian penyahtinjaan <b>5</b></div><div class="step">Cabaran akhir <b>5</b></div><div class="step">Kuiz 10 soalan <b>20</b></div></div><p class="small">Jumlah keseluruhan: <b>50 markah</b></p></div>
+<section class="card" id="cabaran-akhir">
+<h2>🎯 Cabaran Akhir: Susun Proses • 5 Markah</h2>
+<p class="small">Pilih urutan proses penyahtinjaan yang paling tepat.</p>
+<div class="obs-q"><div class="obs-options"><label><input type="radio" name="finalPath" value="a"> Makanan → usus kecil → usus besar → rektum → dubur</label><label><input type="radio" name="finalPath" value="b"> Makanan → paru-paru → trakea → rektum → dubur</label></div></div>
+<button type="button" class="green" onclick="checkFinalPath()">Semak Cabaran</button><div class="obs-result" id="finalPathResult"></div>\div>
+</section>
+
 <section id="kuiz" class="card">
-<h2>🧠 Kuiz Bergambar — Cabaran Organ Manusia</h2>
-<p class="small">Pilih jawapan berdasarkan gambar. Gambar organ sebenar/3D digunakan supaya murid lebih mudah mengenal pasti struktur organ.</p>
+<h2>🧠 Kuiz Bergambar — 10 Soalan Objektif</h2>
+<div class="activity-score">AKTIVITI 6 • 20 MARKAH • 2 MARKAH SETIAP SOALAN</div>
+<p class="small">Pilih satu jawapan bagi setiap soalan. Markah kuiz dikira secara automatik.</p>
 
-<div class="question">
-<b>1. Lihat organ dalam gambar. Apakah nama organ yang ditunjukkan?</b>
-<div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Ilustrasi sistem pernafasan manusia"></div>
-<label><input type="radio" name="q1" value="a"> A. Paru-paru</label>
-<label><input type="radio" name="q1" value="b"> B. Perut</label>
-<label><input type="radio" name="q1" value="c"> C. Usus besar</label>
-<label><input type="radio" name="q1" value="d"> D. Jantung</label>
-</div>
+<div class="question"><b>1. Apakah fungsi utama hidung dalam pernafasan?</b><div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Sistem pernafasan manusia"></div>
+<label><input type="radio" name="q1" value="a"> A. Menapis dan melembapkan udara</label><label><input type="radio" name="q1" value="b"> B. Menyimpan tinja</label><label><input type="radio" name="q1" value="c"> C. Menyerap nutrien</label><label><input type="radio" name="q1" value="d"> D. Mengepam darah</label></div>
 
-<div class="question">
-<b>2. Berdasarkan gambar sistem pernafasan, salur udara yang membawa udara menuju paru-paru ialah...</b>
-<div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Ilustrasi organ pernafasan manusia"></div>
-<label><input type="radio" name="q2" value="a"> A. Paru-paru</label>
-<label><input type="radio" name="q2" value="b"> B. Trakea</label>
-<label><input type="radio" name="q2" value="c"> C. Usus kecil</label>
-<label><input type="radio" name="q2" value="d"> D. Rektum</label>
-</div>
+<div class="question"><b>2. Salur udara yang membawa udara dari hidung menuju bronkus ialah...</b><div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Organ pernafasan manusia"></div>
+<label><input type="radio" name="q2" value="a"> A. Rektum</label><label><input type="radio" name="q2" value="b"> B. Trakea</label><label><input type="radio" name="q2" value="c"> C. Usus kecil</label><label><input type="radio" name="q2" value="d"> D. Dubur</label></div>
 
-<div class="question">
-<b>3. Perhatikan gambar 3D organ pencernaan. Bahagian yang berlingkar di bahagian tengah ialah...</b>
-<div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Ilustrasi 3D usus besar dan usus kecil manusia"></div>
-<label><input type="radio" name="q3" value="a"> A. Usus kecil</label>
-<label><input type="radio" name="q3" value="b"> B. Usus besar</label>
-<label><input type="radio" name="q3" value="c"> C. Rektum</label>
-<label><input type="radio" name="q3" value="d"> D. Trakea</label>
-</div>
+<div class="question"><b>3. Apakah yang berlaku kepada paru-paru ketika menarik nafas?</b>
+<label><input type="radio" name="q3" value="a"> A. Mengembang</label><label><input type="radio" name="q3" value="b"> B. Mengecut sepenuhnya</label><label><input type="radio" name="q3" value="c"> C. Berhenti bergerak</label><label><input type="radio" name="q3" value="d"> D. Menjadi keras</label></div>
 
-<div class="question">
-<b>4. Berdasarkan gambar 3D, bahan makanan yang tidak diperlukan akhirnya...</b>
-<div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Ilustrasi 3D sistem usus manusia"></div>
-<label><input type="radio" name="q4" value="a"> A. Diserap sebagai oksigen</label>
-<label><input type="radio" name="q4" value="b"> B. Disingkirkan sebagai tinja</label>
-<label><input type="radio" name="q4" value="c"> C. Bertukar menjadi darah</label>
-<label><input type="radio" name="q4" value="d"> D. Masuk ke dalam paru-paru</label>
-</div>
+<div class="question"><b>4. Selepas aktiviti fizikal, kadar pernafasan biasanya...</b><div class="quiz-image split"><div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="50" ry="58" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Rehat</text></svg></div><div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="68" ry="72" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Aktiviti</text></svg></div></div>
+<label><input type="radio" name="q4" value="a"> A. Meningkat</label><label><input type="radio" name="q4" value="b"> B. Menjadi sifar</label><label><input type="radio" name="q4" value="c"> C. Berhenti</label><label><input type="radio" name="q4" value="d"> D. Tidak berubah langsung</label></div>
 
-<div class="question">
-<b>5. Bandingkan dua gambar. Apakah pemerhatian yang paling tepat?</b>
-<div class="quiz-image split">
-<div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="55" ry="62" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Rehat</text></svg></div>
-<div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="68" ry="72" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Aktiviti</text></svg></div>
-</div>
-<label><input type="radio" name="q5" value="a"> A. Kadar pernafasan meningkat selepas aktiviti</label>
-<label><input type="radio" name="q5" value="b"> B. Kadar pernafasan menjadi sifar selepas aktiviti</label>
-<label><input type="radio" name="q5" value="c"> C. Manusia tidak memerlukan oksigen ketika aktiviti</label>
-<label><input type="radio" name="q5" value="d"> D. Paru-paru berhenti berfungsi ketika aktiviti</label>
-</div>
+<div class="question"><b>5. Organ yang berlingkar di bahagian tengah gambar 3D ialah...</b><div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Usus besar dan usus kecil"></div>
+<label><input type="radio" name="q5" value="a"> A. Usus kecil</label><label><input type="radio" name="q5" value="b"> B. Usus besar</label><label><input type="radio" name="q5" value="c"> C. Trakea</label><label><input type="radio" name="q5" value="d"> D. Paru-paru</label></div>
 
-<button onclick="quiz()">Semak Jawapan</button>
+<div class="question"><b>6. Apakah fungsi utama usus kecil?</b>
+<label><input type="radio" name="q6" value="a"> A. Menyerap nutrien</label><label><input type="radio" name="q6" value="b"> B. Menapis udara</label><label><input type="radio" name="q6" value="c"> C. Mengepam darah</label><label><input type="radio" name="q6" value="d"> D. Menyimpan udara</label></div>
+
+<div class="question"><b>7. Apakah fungsi utama usus besar dalam proses penyahtinjaan?</b>
+<label><input type="radio" name="q7" value="a"> A. Menyerap sebahagian besar air</label><label><input type="radio" name="q7" value="b"> B. Menukar oksigen menjadi karbon dioksida</label><label><input type="radio" name="q7" value="c"> C. Mengembangkan paru-paru</label><label><input type="radio" name="q7" value="d"> D. Membawa udara ke hidung</label></div>
+
+<div class="question"><b>8. Tinja disimpan sementara sebelum disingkirkan melalui...</b>
+<label><input type="radio" name="q8" value="a"> A. Rektum</label><label><input type="radio" name="q8" value="b"> B. Trakea</label><label><input type="radio" name="q8" value="c"> C. Bronkus</label><label><input type="radio" name="q8" value="d"> D. Hidung</label></div>
+
+<div class="question"><b>9. Apakah maksud penyahtinjaan?</b>
+<label><input type="radio" name="q9" value="a"> A. Menyingkirkan tinja daripada badan</label><label><input type="radio" name="q9" value="b"> B. Menyerap oksigen ke dalam darah</label><label><input type="radio" name="q9" value="c"> C. Menghantar udara ke paru-paru</label><label><input type="radio" name="q9" value="d"> D. Menghasilkan tenaga daripada cahaya</label></div>
+
+<div class="question"><b>10. Laluan yang betul bagi bahan yang tidak diperlukan ialah...</b>
+<label><input type="radio" name="q10" value="a"> A. Usus kecil → usus besar → rektum → dubur</label><label><input type="radio" name="q10" value="b"> B. Paru-paru → trakea → usus besar → dubur</label><label><input type="radio" name="q10" value="c"> C. Hidung → trakea → rektum → usus kecil</label><label><input type="radio" name="q10" value="d"> D. Usus besar → hidung → paru-paru → dubur</label></div>
+
+<button type="button" onclick="quiz()">Semak Kuiz</button>
 <div class="result" id="result"></div>
+<div class="final-score" id="finalScore"><strong id="finalScoreValue">0/50</strong><div id="finalScoreText">Lengkapkan semua aktiviti.</div></div>
 </section>
 </main>
 <footer>Sains Tahun 4 • Aktiviti interaktif untuk pembelajaran murid</footer>
@@ -437,8 +461,9 @@ function setDigestInfo(key){
   document.getElementById('digestInfoText').textContent=d.text;
   document.querySelectorAll('#digestVisual .digest-organ').forEach(x=>x.classList.toggle('active',x.dataset.organ===key));
 }
-function breath(mode){
+function breath(mode,award=true){
   const active=mode==='active';
+  if(award){ if(active) respActiveSeen=true; else respRestSeen=true; if(respRestSeen&&respActiveSeen){scores.breathSim=5; updateScore();} }
   document.getElementById('rate').textContent=active?30:18;
   document.getElementById('state').textContent=active?'Selepas aktiviti':'Rehat';
   document.getElementById('airv').textContent=active?'Lebih tinggi':'Sederhana';
@@ -454,8 +479,9 @@ function toggleBreathing(){
 }
 function stopBreath(){ breathingOn=false; document.getElementById('respVisual').classList.remove('breathing'); document.getElementById('breathToggle').textContent='▶ Sambung Animasi'; }
 
-function digest(){
+function digest(award=true){
   digestOn=true;
+  if(award){scores.digestSim=5; updateScore();}
   document.getElementById('digestVisual').classList.add('fecal-flow','nutrient-flow');
   document.getElementById('digestToggle').textContent='⏸ Hentikan Animasi';
   document.getElementById('digestPos').textContent='Usus kecil → usus besar';
@@ -472,11 +498,26 @@ function resetDigest(){ digest(); }
 
 function initDragLabels(){ return; }
 
+const scores={breathSim:0,breathObs:0,airPath:0,digestSim:0,digestObs:0,finalPath:0,quiz:0};
+let respRestSeen=false, respActiveSeen=false;
+function updateScore(){
+ const total=Object.values(scores).reduce((a,b)=>a+b,0);
+ document.getElementById('totalScore').textContent=total;
+ document.getElementById('scoreFill').style.width=(total/50*100)+'%';
+ document.getElementById('scoreStatus').textContent=total===50?'Semua aktiviti selesai! Tahniah! 🎉':'Lengkapkan aktiviti untuk mengumpul markah.';
+ const fs=document.getElementById('finalScore'); if(fs){fs.style.display=total>0?'block':'none';document.getElementById('finalScoreValue').textContent=total+'/50';document.getElementById('finalScoreText').textContent=total===50?'Tahniah! Semua aktiviti telah diselesaikan. 🎉':'Teruskan sehingga 50 markah.';}
+}
+function checkBreathObs(){const ans={bo1:'a',bo2:'a',bo3:'a'};let c=0;Object.keys(ans).forEach(q=>{const x=document.querySelector('input[name="'+q+'"]:checked');if(x&&x.value===ans[q])c++;});scores.breathObs=c===3?5:Math.round(c/3*5);const r=document.getElementById('breathObsResult');r.style.display='block';r.textContent='Pemerhatian: '+scores.breathObs+'/5 markah.';updateScore();}
+function checkAirPath(){const x=document.querySelector('input[name="pathq"]:checked');scores.airPath=x&&x.value==='a'?5:0;const r=document.getElementById('airPathResult');r.style.display='block';r.textContent='Urutan: '+scores.airPath+'/5 markah.';updateScore();}
+function checkDigestObs(){const ans={do1:'a',do2:'a',do3:'a'};let c=0;Object.keys(ans).forEach(q=>{const x=document.querySelector('input[name="'+q+'"]:checked');if(x&&x.value===ans[q])c++;});scores.digestObs=c===3?5:Math.round(c/3*5);const r=document.getElementById('digestObsResult');r.style.display='block';r.textContent='Pemerhatian: '+scores.digestObs+'/5 markah.';updateScore();}
+function checkFinalPath(){const x=document.querySelector('input[name="finalPath"]:checked');scores.finalPath=x&&x.value==='a'?5:0;const r=document.getElementById('finalPathResult');r.style.display='block';r.textContent='Cabaran akhir: '+scores.finalPath+'/5 markah.';updateScore();}
 function quiz(){
- const ans={q1:'a',q2:'b',q3:'a',q4:'b',q5:'a'};let score=0;
- Object.keys(ans).forEach(q=>{const x=document.querySelector('input[name="'+q+'"]:checked');if(x&&x.value===ans[q])score++});
+ const ans={q1:'a',q2:'b',q3:'a',q4:'a',q5:'a',q6:'a',q7:'a',q8:'a',q9:'a',q10:'a'};let c=0;
+ Object.keys(ans).forEach(q=>{const x=document.querySelector('input[name="'+q+'"]:checked');if(x&&x.value===ans[q])c++;});
+ scores.quiz=c*2;
  const r=document.getElementById('result');r.style.display='block';
- r.textContent=`Pencapaian kamu: ${score}/5. `+(score===5?'Tahniah! Cemerlang! 🎉':score>=3?'Bagus! Cuba semak semula bahagian yang belum tepat.':'Teruskan belajar dan cuba lagi! 💪');
+ r.textContent=`Kuiz: ${c}/10 betul = ${scores.quiz}/20 markah. `+(c===10?'Tahniah! Cemerlang! 🎉':c>=7?'Bagus! Semak semula soalan yang belum tepat.':'Teruskan belajar dan cuba lagi! 💪');
+ updateScore();
 }
 
 document.querySelectorAll('#respVisual .resp-hotspot').forEach(el=>el.addEventListener('click',()=>setRespInfo(el.dataset.organ)));
@@ -486,9 +527,10 @@ document.querySelectorAll('[data-digest-organ]').forEach(btn=>btn.addEventListen
 
 setRespInfo('paru');
 setDigestInfo('ususKecil');
-breath('rest');
-digest();
 initDragLabels();
+updateScore();
+breath('rest',false);
+digest(false);
 
 if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   stopBreath();
