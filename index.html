@@ -12,7 +12,7 @@
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
 header{background:linear-gradient(135deg,#173b70,#2478d8);color:#fff;padding:18px 14px 22px}
-.wrap{max-width:1380px;margin:auto}
+.wrap{max-width:1440px;margin:auto}
 .badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:4px 9px;border-radius:99px;font-size:11px}
 h1{font-size:clamp(23px,4vw,38px);margin:8px 0 4px;line-height:1.05}
 .subtitle{opacity:.9;font-size:13px}
@@ -117,7 +117,7 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 
 /* Exact reference image: visual tidak diubah, hanya diletakkan sebagai lapisan asas simulator. */
 .resp-reference{background:#fff;display:flex;align-items:center;justify-content:center;min-height:300px}
-.resp-image-wrap{position:relative;width:min(100%,360px);aspect-ratio:1/1;margin:auto}
+.resp-image-wrap{position:relative;width:min(100%,470px);aspect-ratio:1290/1112;margin:auto}
 .resp-image-wrap>img{display:block;width:100%;height:100%;object-fit:contain}
 .resp-overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .air-path{fill:none;stroke-width:2;stroke-dasharray:7 7;opacity:.28}
@@ -129,7 +129,7 @@ button.green{background:var(--green)} button.orange{background:var(--orange)}
 .resp-reference:not(.breathing) .air-particles,.resp-reference:not(.breathing) .resp-pulse{visibility:hidden}
 @keyframes respPulse{0%,100%{transform:scale(.96);opacity:.12}50%{transform:scale(1.08);opacity:.7}}
 .resp-hotspot{position:absolute;z-index:2;padding:5px 8px;border-radius:999px;background:#fff;color:#17324d;border:1px solid #cddde8;font-size:10px;box-shadow:0 2px 6px #17324d22}
-.resp-hotspot.nose{left:2%;top:25%}.resp-hotspot.trachea{left:2%;top:43%}.resp-hotspot.lungs{right:1%;top:58%}
+.resp-hotspot.nose{left:2%;top:41%}.resp-hotspot.trachea{left:2%;top:61%}.resp-hotspot.lungs{right:1%;top:75%}
 .resp-note{font-size:10px;text-align:center;color:#4b6679;margin-top:3px}.resp-note span{color:#159de0;font-weight:800}.resp-note em{color:#8a5bd6;font-style:normal;font-weight:800}
 
 @media(max-width:760px){
@@ -220,7 +220,7 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 <button class="resp-hotspot trachea" type="button" data-organ="trakea" aria-label="Trakea">Trakea</button>
 <button class="resp-hotspot lungs" type="button" data-organ="paru" aria-label="Paru-paru">Paru-paru</button>
 </div>
-<div class="resp-note">Udara <span>● masuk</span> → paru-paru mengembang → <em>● keluar</em></div>
+<div class="resp-note">Aliran udara beranimasi: <span>● masuk</span> → hidung → trakea → paru-paru → <em>● keluar</em></div>
 </div></div>
 
 <div class="anatomy-info" id="respInfo">
@@ -376,6 +376,43 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 </div>
 </section>
 
+
+<section class="card" id="label-organ">
+<h2>🏷️ Aktiviti Interaktif: Label Organ Usus • 5 Markah</h2>
+<p class="small">Seret nama organ ke kotak kosong pada gambar. Pada telefon, tekan nama organ kemudian tekan kotak yang betul. Gambar rujukan dikekalkan tanpa sebarang suntingan.</p>
+<div class="drag-board" id="dragBoard">
+  <img class="digest-reference" src="label-usus.png" alt="Gambar rujukan usus dengan tiga kotak label kosong; gambar asal tidak diubah">
+  <button class="dropbox drop-left" type="button" data-target="ususKecil" aria-label="Kotak label kiri"><span>Letak label</span></button>
+  <button class="dropbox drop-right" type="button" data-target="ususBesar" aria-label="Kotak label kanan atas"><span>Letak label</span></button>
+  <button class="dropbox drop-bottom" type="button" data-target="rektum" aria-label="Kotak label bawah"><span>Letak label</span></button>
+</div>
+<div class="drag-choices" id="dragChoices">
+  <button type="button" draggable="true" class="drag-choice" data-answer="ususKecil">Usus kecil</button>
+  <button type="button" draggable="true" class="drag-choice" data-answer="ususBesar">Usus besar</button>
+  <button type="button" draggable="true" class="drag-choice" data-answer="rektum">Rektum / dubur</button>
+</div>
+<div class="controls"><button type="button" class="green" id="checkLabels">Semak Label</button><button type="button" class="secondary" id="resetLabels">Cuba Semula</button></div>
+<div class="obs-result" id="labelResult" style="display:block" aria-live="polite">Pilih atau seret label ke kotak yang sesuai.</div>
+</section>
+
+<section class="card" id="nota-penting">
+<h2>📌 Nota Penting</h2>
+<div class="grid">
+ <div class="info"><b>Pernafasan</b><p>Udara melalui hidung → trakea → bronkus → paru-paru. Semasa menarik nafas, paru-paru mengembang; semasa menghembus nafas, paru-paru mengempis.</p></div>
+ <div class="info green"><b>Penyahtinjaan</b><p>Usus kecil menyerap nutrien. Usus besar menyerap sebahagian air. Tinja disimpan sementara di rektum dan keluar melalui dubur.</p></div>
+</div>
+</section>
+<style>
+.drag-board{position:relative;width:min(100%,900px);margin:8px auto 10px;line-height:0;border:1px solid #e1e6eb;border-radius:10px;overflow:hidden;background:#fff}
+.digest-reference{display:block;width:100%;height:auto}
+.dropbox{position:absolute;line-height:1.2;display:flex;align-items:center;justify-content:center;text-align:center;background:#ffffffd9;color:#17324d;border:2px dashed #2678b9;border-radius:10px;font-size:clamp(10px,1.5vw,15px);font-weight:800;padding:4px;min-height:18%;width:25%;}
+.dropbox span{pointer-events:none}.drop-left{left:4%;top:23%;height:23%}.drop-right{right:3%;top:15%;height:23%}.drop-bottom{right:10%;bottom:8%;height:22%}
+.dropbox.filled{background:#e9f8ff;border-style:solid}.dropbox.correct{background:#dff7e7;border-color:#269b58}.dropbox.wrong{background:#ffe8e8;border-color:#d94b4b}
+.drag-choices{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:8px 0}.drag-choice{background:#edf5ff;color:#17324d;border:1px solid #b8d3ed;touch-action:manipulation}.drag-choice.selected{outline:3px solid #f2b84b;background:#fff4cf}
+.note-outside{font-size:11px;color:#5e7488}
+@media(max-width:600px){.dropbox{border-radius:6px;padding:2px;font-size:10px}.drop-left{left:4%;top:23%}.drop-right{right:3%;top:15%}.drop-bottom{right:10%;bottom:8%}}
+</style>
+
 <section class="card">
 <h2>🧠 Ringkasan</h2>
 <div class="grid">
@@ -384,17 +421,12 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 </div>
 </section>
 
-<div class="obs-interactive"><b>📊 Agihan Markah</b><div class="grid" style="margin-top:7px"><div class="step">Simulator pernafasan <b>5</b></div><div class="step">Pemerhatian pernafasan <b>5</b></div><div class="step">Laluan udara <b>5</b></div><div class="step">Simulator penyahtinjaan <b>5</b></div><div class="step">Pemerhatian penyahtinjaan <b>5</b></div><div class="step">Cabaran akhir <b>5</b></div><div class="step">Kuiz 10 soalan <b>20</b></div></div><p class="small">Jumlah keseluruhan: <b>50 markah</b></p></div>
-<section class="card" id="cabaran-akhir">
-<h2>🎯 Cabaran Akhir: Susun Proses • 5 Markah</h2>
-<p class="small">Pilih urutan proses penyahtinjaan yang paling tepat.</p>
-<div class="obs-q"><div class="obs-options"><label><input type="radio" name="finalPath" value="a"> Makanan → usus kecil → usus besar → rektum → dubur</label><label><input type="radio" name="finalPath" value="b"> Makanan → paru-paru → trakea → rektum → dubur</label></div></div>
-<button type="button" class="green" onclick="checkFinalPath()">Semak Cabaran</button><div class="obs-result" id="finalPathResult"></div>\div>
-</section>
+<div class="obs-interactive"><b>📊 Agihan Markah</b><div class="grid" style="margin-top:7px"><div class="step">Simulator pernafasan <b>5</b></div><div class="step">Pemerhatian pernafasan <b>5</b></div><div class="step">Laluan udara <b>5</b></div><div class="step">Simulator penyahtinjaan <b>5</b></div><div class="step">Pemerhatian penyahtinjaan <b>5</b></div><div class="step">Aktiviti label organ usus <b>5</b></div><div class="step">Kuiz 10 soalan <b>20</b></div></div><p class="small">Jumlah keseluruhan: <b>50 markah</b></p></div>
+
 
 <section id="kuiz" class="card">
 <h2>🧠 Kuiz Bergambar — 10 Soalan Objektif</h2>
-<div class="activity-score">AKTIVITI 6 • 20 MARKAH • 2 MARKAH SETIAP SOALAN</div>
+<div class="activity-score">AKTIVITI 7 • 20 MARKAH • 2 MARKAH SETIAP SOALAN</div>
 <p class="small">Pilih satu jawapan bagi setiap soalan. Markah kuiz dikira secara automatik.</p>
 
 <div class="question"><b>1. Apakah fungsi utama hidung dalam pernafasan?</b><div class="quiz-image real-anatomy"><img src="respiratory-reference.png" alt="Sistem pernafasan manusia"></div>
@@ -409,7 +441,7 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 <div class="question"><b>4. Selepas aktiviti fizikal, kadar pernafasan biasanya...</b><div class="quiz-image split"><div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="50" ry="58" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Rehat</text></svg></div><div><svg viewBox="0 0 220 150"><ellipse cx="110" cy="78" rx="68" ry="72" fill="#ef707a"/><text x="110" y="140" text-anchor="middle" font-weight="800" fill="#17324d">Aktiviti</text></svg></div></div>
 <label><input type="radio" name="q4" value="a"> A. Meningkat</label><label><input type="radio" name="q4" value="b"> B. Menjadi sifar</label><label><input type="radio" name="q4" value="c"> C. Berhenti</label><label><input type="radio" name="q4" value="d"> D. Tidak berubah langsung</label></div>
 
-<div class="question"><b>5. Organ yang berlingkar di bahagian tengah gambar 3D ialah...</b><div class="quiz-image real-anatomy intestine"><img src="https://png.pngtree.com/png-vector/20251117/ourlarge/pngtree-a-detailed-3d-rendering-of-the-human-large-and-small-intestines-png-image_17950339.webp" alt="Usus besar dan usus kecil"></div>
+<div class="question"><b>5. Organ yang berlingkar di bahagian tengah gambar 3D ialah...</b><div class="quiz-image real-anatomy intestine"><img src="label-usus.png" alt="Usus besar dan usus kecil"></div>
 <label><input type="radio" name="q5" value="a"> A. Usus kecil</label><label><input type="radio" name="q5" value="b"> B. Usus besar</label><label><input type="radio" name="q5" value="c"> C. Trakea</label><label><input type="radio" name="q5" value="d"> D. Paru-paru</label></div>
 
 <div class="question"><b>6. Apakah fungsi utama usus kecil?</b>
@@ -519,6 +551,33 @@ function quiz(){
  r.textContent=`Kuiz: ${c}/10 betul = ${scores.quiz}/20 markah. `+(c===10?'Tahniah! Cemerlang! 🎉':c>=7?'Bagus! Semak semula soalan yang belum tepat.':'Teruskan belajar dan cuba lagi! 💪');
  updateScore();
 }
+
+
+// Seret label organ; pada skrin sentuh, pilih label dahulu kemudian kotak.
+let selectedLabel=null;
+const labelAssignments={};
+const labelNames={ususKecil:'Usus kecil',ususBesar:'Usus besar',rektum:'Rektum / dubur'};
+document.querySelectorAll('.drag-choice').forEach(btn=>{
+ btn.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',btn.dataset.answer);selectedLabel=btn.dataset.answer;});
+ btn.addEventListener('click',()=>{selectedLabel=btn.dataset.answer;document.querySelectorAll('.drag-choice').forEach(b=>b.classList.toggle('selected',b===btn));document.getElementById('labelResult').textContent='Label dipilih: '+labelNames[selectedLabel]+'. Sekarang tekan kotak yang betul.';});
+});
+document.querySelectorAll('.dropbox').forEach(box=>{
+ box.addEventListener('dragover',e=>e.preventDefault());
+ box.addEventListener('drop',e=>{e.preventDefault();const key=e.dataTransfer.getData('text/plain');if(key)putLabel(box,key);});
+ box.addEventListener('click',()=>{if(selectedLabel)putLabel(box,selectedLabel);});
+});
+function putLabel(box,key){
+ const target=box.dataset.target;
+ if(Object.values(labelAssignments).includes(key)){for(const k of Object.keys(labelAssignments)){if(labelAssignments[k]===key)delete labelAssignments[k];}}
+ labelAssignments[target]=key;box.querySelector('span').textContent=labelNames[key];box.classList.add('filled');box.classList.remove('correct','wrong');
+ document.querySelectorAll('.dropbox').forEach(b=>{if(!labelAssignments[b.dataset.target]){b.querySelector('span').textContent='Letak label';b.classList.remove('filled');}});
+ document.querySelectorAll('.drag-choice').forEach(b=>b.classList.toggle('selected',b.dataset.answer===key));selectedLabel=null;
+}
+document.getElementById('checkLabels').addEventListener('click',()=>{
+ let correct=0;document.querySelectorAll('.dropbox').forEach(box=>{const ok=labelAssignments[box.dataset.target]===box.dataset.target;box.classList.toggle('correct',ok);box.classList.toggle('wrong',!!labelAssignments[box.dataset.target]&&!ok);if(ok)correct++;});
+ scores.finalPath=Math.round(correct/3*5);updateScore();const r=document.getElementById('labelResult');r.style.display='block';r.textContent='Label betul: '+correct+'/3. Markah aktiviti: '+scores.finalPath+'/5.'+(correct===3?' Bagus, semua label tepat!':' Semak kedudukan dan cuba lagi.');
+});
+document.getElementById('resetLabels').addEventListener('click',()=>{Object.keys(labelAssignments).forEach(k=>delete labelAssignments[k]);document.querySelectorAll('.dropbox').forEach(b=>{b.querySelector('span').textContent='Letak label';b.classList.remove('filled','correct','wrong');});document.querySelectorAll('.drag-choice').forEach(b=>b.classList.remove('selected'));document.getElementById('labelResult').textContent='Pilih atau seret label ke kotak yang sesuai.';scores.finalPath=0;updateScore();});
 
 document.querySelectorAll('#respVisual .resp-hotspot').forEach(el=>el.addEventListener('click',()=>setRespInfo(el.dataset.organ)));
 document.querySelectorAll('#respInfo [data-organ]').forEach(btn=>btn.addEventListener('click',()=>setRespInfo(btn.dataset.organ)));

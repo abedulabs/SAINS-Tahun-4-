@@ -1,10 +1,11 @@
 # Sains Tahun 4 — Manusia
-Topik: Pernafasan dan Penyahtinjaan
 
-## Cara guna di GitHub Pages
-1. Buat repository baharu di GitHub.
-2. Upload `index.html`.
-3. Settings → Pages → Deploy from branch → pilih `main` dan folder `/root`.
-4. Simpan dan buka URL GitHub Pages.
+Halaman pembelajaran interaktif tentang pernafasan dan penyahtinjaan.
 
-Fail ini tidak memerlukan internet, library luar atau server.
+## Fail untuk GitHub Pages
+Muat naik semua fail berikut ke root repository: `index.html`, `respiratory-reference.png`, `organ-pernafasan.png`, `label-usus.png`. Semua gambar rujukan dibekalkan pengguna dan digunakan tanpa suntingan.
+
+Aktifkan GitHub Pages melalui Settings → Pages → Deploy from a branch → main → /(root).
+
+## Agihan markah
+Simulator pernafasan 5, pemerhatian pernafasan 5, laluan udara 5, simulator penyahtinjaan 5, pemerhatian penyahtinjaan 5, aktiviti label organ / cabaran akhir 5, kuiz objektif 10 × 2 = 20. Jumlah 50 markah.
