@@ -166,6 +166,16 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 .obs-result{font-weight:800;font-size:11px;margin-top:7px;display:none}
 .final-score{background:#edf9f1;border:1px solid #bfe5ca;border-radius:12px;padding:12px;margin-top:10px;display:none}
 .final-score strong{font-size:24px}
+.achievement-btn{display:block;width:100%;margin-top:10px;background:#6b43c4;color:#fff;padding:11px;font-size:13px}
+.achievement-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(5,18,32,.72);padding:18px;align-items:center;justify-content:center}
+.achievement-modal.show{display:flex}
+.achievement-box{width:min(100%,420px);background:#fff;border-radius:18px;padding:22px;text-align:center;box-shadow:0 18px 60px #0005;animation:popIn .22s ease-out}
+.achievement-icon{font-size:42px;margin-bottom:7px}
+.achievement-box h2{font-size:22px;color:#17324d;margin:4px 0 8px}
+.achievement-box p{font-size:14px;line-height:1.55;color:#526779}
+.achievement-mark{font-size:32px;font-weight:900;color:#176bb0;margin:8px 0}
+.achievement-box button{min-width:110px;margin-top:10px}
+@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 @media(max-width:600px){.score-panel{align-items:flex-start}.score-track{order:3;flex-basis:100%}.obs-options{grid-template-columns:1fr}}
 </style>
 </head>
@@ -462,9 +472,20 @@ footer{text-align:center;color:var(--muted);padding:12px;font-size:11px}
 <button type="button" onclick="quiz()">Semak Kuiz</button>
 <div class="result" id="result"></div>
 <div class="final-score" id="finalScore"><strong id="finalScoreValue">0/50</strong><div id="finalScoreText">Lengkapkan semua aktiviti.</div></div>
+<button type="button" class="achievement-btn" onclick="showAchievement()">🏆 Lihat Pencapaian Keseluruhan</button>
 </section>
 </main>
 <footer>Sains Tahun 4 • Aktiviti interaktif untuk pembelajaran murid</footer>
+
+<div class="achievement-modal" id="achievementModal" role="dialog" aria-modal="true" aria-labelledby="achievementTitle" aria-describedby="achievementMessage">
+  <div class="achievement-box">
+    <div class="achievement-icon" id="achievementIcon">🌱</div>
+    <h2 id="achievementTitle">Pencapaian Kamu</h2>
+    <div class="achievement-mark"><span id="achievementScore">0</span>/50</div>
+    <p id="achievementMessage">Teruskan usaha. Kamu pasti boleh menjadi lebih baik!</p>
+    <button type="button" onclick="closeAchievement()">Tutup</button>
+  </div>
+</div>
 
 <script>
 let timer=null;
@@ -532,6 +553,28 @@ function initDragLabels(){ return; }
 
 const scores={breathSim:0,breathObs:0,airPath:0,digestSim:0,digestObs:0,finalPath:0,quiz:0};
 let respRestSeen=false, respActiveSeen=false;
+function showAchievement(){
+ const total=Object.values(scores).reduce((a,b)=>a+b,0);
+ const icon=document.getElementById('achievementIcon');
+ const title=document.getElementById('achievementTitle');
+ const message=document.getElementById('achievementMessage');
+ document.getElementById('achievementScore').textContent=total;
+ if(total>=40){
+   icon.textContent='🏆'; title.textContent='Tahniah, Anda Cemerlang!';
+   message.textContent='Pencapaian yang hebat! Teruskan usaha dan kekalkan semangat untuk terus berjaya.';
+ }else if(total>=25){
+   icon.textContent='⭐'; title.textContent='Syabas! Teruskan Usaha';
+   message.textContent='Kamu sudah menunjukkan usaha yang baik. Semak semula jawapan dan cuba tingkatkan markah lagi.';
+ }else{
+   icon.textContent='🌱'; title.textContent='Jangan Putus Asa!';
+   message.textContent='Teruskan usaha. Baca nota, cuba semula simulator dan jawab aktiviti dengan teliti. Kamu pasti boleh meningkatkan pencapaian!';
+ }
+ document.getElementById('achievementModal').classList.add('show');
+}
+function closeAchievement(){document.getElementById('achievementModal').classList.remove('show');}
+document.getElementById('achievementModal').addEventListener('click',function(e){if(e.target===this)closeAchievement();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAchievement();});
+
 function updateScore(){
  const total=Object.values(scores).reduce((a,b)=>a+b,0);
  document.getElementById('totalScore').textContent=total;
